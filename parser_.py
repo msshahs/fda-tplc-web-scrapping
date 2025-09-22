@@ -34,7 +34,7 @@ def _extract_device_name_from_table(soup: BeautifulSoup) -> Optional[str]:
         for idx, c in enumerate(cells):
             label = c.get_text(" ", strip=True).lower()
             if "device name" in label or label == "device":
-                # take the next cell's text if present
+
                 if idx + 1 < len(cells):
                     name = cells[idx + 1].get_text(" ", strip=True)
                     if name and len(name) > 2:
@@ -72,7 +72,7 @@ def _collect_problem_items(soup: BeautifulSoup, page_url: str, kind: str):
         count = _row_count_from_anchor(a)
         items.append(ProblemItem(name=name, count=count, maude_link=_abs(page_url, href)))
 
-    # de-duplicate by problem name
+
     seen = set()
     uniq = []
     for it in items:

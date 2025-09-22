@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 from models import DeviceResult
 from parser_ import parse_device_page
 
-# TPLC search/list page
 TPLC_LIST_URL = "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfTPLC/tplc.cfm"
 
 UA = "Mozilla/5.0 (compatible; TPLC-Scraper/1.0)"
