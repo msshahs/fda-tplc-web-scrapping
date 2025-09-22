@@ -33,14 +33,14 @@ def _build_search_url(
     Construct the list/search URL. The TPLC UI exposes these params in the URL.
     """
     params = {
-        "devicename": device_name,             # device name contains
-        "productcode": product_code or "",     # optional product code
+        "devicename": device_name,             
+        "productcode": product_code or "",    
         "deviceclass": "",
         "regulationnumber": "",
-        "min_report_year": min_year,           # filter MDR year
-        "sortcolumn": "dn",                    # sort by device name
-        "start_search": start_search,          # 1-based offset
-        "pagenum": per_page,                   # page size (UI tops at 500)
+        "min_report_year": min_year,           
+        "sortcolumn": "dn",                   
+        "start_search": start_search,         
+        "pagenum": per_page,                   
     }
     return f"{TPLC_LIST_URL}?{urlencode(params)}"
 
@@ -62,11 +62,10 @@ def _extract_device_links_from_list(html: str, base_url: str) -> List[Dict[str, 
         qs = {k.lower(): v for k, v in parse_qs(parsed.query).items()}
         if "id" not in qs:
             continue
-        # anchor text in the Device Name column is the correct device name
+
         if text:
             out.append({"url": abs_url, "name": text})
 
-    # de-dupe by URL while preserving first name seen
     seen = set()
     dedup = []
     for item in out:
@@ -81,7 +80,6 @@ def search_and_collect(
     device_name: str,
     product_code: Optional[str],
     min_year: int,
-    max_devices: int = 50,
 ) -> List[Dict[str, str]]:
     sess = _session()
     try:
@@ -115,9 +113,6 @@ def search_and_collect(
         r = sess.get(url, timeout=TIMEOUT)
         r.raise_for_status()
         device_links = _extract_device_links_from_list(r.text, TPLC_LIST_URL)
-
-    if max_devices:
-        device_links = device_links[:max_devices]
 
     print(f"Found {len(device_links)} device links.")
     return device_links
