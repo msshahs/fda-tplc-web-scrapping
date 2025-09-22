@@ -1,0 +1,38 @@
+# --- Python basics ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# --- Virtual envs ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Packages / builds / caches ---
+*.egg-info/
+dist/
+build/
+.eggs/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+coverage.xml
+htmlcov/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- Env/config secrets ---
+.env
+*.env
+
+# --- Editors & OS junk ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
